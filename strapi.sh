@@ -1,19 +1,19 @@
 #!/bin/sh
-set -ea
+# set -ea
 
-_stopStrapi() {
-  echo "Stopping strapi"
-  kill -SIGINT "$strapiPID"
-  wait "$strapiPID"
-}
+# _stopStrapi() {
+#   echo "Stopping strapi"
+#   kill -SIGINT "$strapiPID"
+#   wait "$strapiPID"
+# }
 
-trap _stopStrapi SIGTERM SIGINT
+# trap _stopStrapi SIGTERM SIGINT
 
 cd /usr/src/api
 
 APP_NAME=${APP_NAME:-strapi-app}
 DATABASE_CLIENT=${DATABASE_CLIENT:-mongo}
-DATABASE_HOST=${DATABASE_HOST:-localhost}
+DATABASE_HOST=${DATABASE_HOST:-127.0.0.1}
 DATABASE_PORT=${DATABASE_PORT:-27017}
 DATABASE_NAME=${DATABASE_NAME:-strapi}
 DATABASE_SRV=${DATABASE_SRV:-false}
@@ -28,7 +28,7 @@ then
 fi
 
 cd $APP_NAME
-strapi start &
+strapi develop &
 
 strapiPID=$!
 wait "$strapiPID"

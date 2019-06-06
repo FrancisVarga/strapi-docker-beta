@@ -1,4 +1,4 @@
-FROM node:11.1.0-alpine
+FROM ubuntu:latest
 
 LABEL maintainer="Luca Perret <perret.luca@gmail.com>" \
       org.label-schema.vendor="Strapi" \
@@ -11,9 +11,13 @@ LABEL maintainer="Luca Perret <perret.luca@gmail.com>" \
 
 WORKDIR /usr/src/api
 
-RUN echo "unsafe-perm = true" >> ~/.npmrc
+RUN apt-get update
+RUN apt-get -y install curl gnupg
+RUN curl -sL https://deb.nodesource.com/setup_11.x  | bash -
+RUN apt-get -y install nodejs
 
-RUN npm install -g strapi@alpha
+RUN npm install -g strapi@beta --unsafe-perm=true --allow-root
+RUN strapi -v
 
 COPY strapi.sh ./
 RUN chmod +x ./strapi.sh
