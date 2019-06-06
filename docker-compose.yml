@@ -5,7 +5,7 @@ services:
     # Can comment out if use mongodb service below
     network_mode: host
     build: .
-    image: strapi/strapi
+    image: strapi/strapi-beta
     environment:
       - APP_NAME=strapi-app
       - DATABASE_CLIENT=mongo
