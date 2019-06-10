@@ -28,6 +28,7 @@ then
 fi
 
 cd $APP_NAME
+npm i
 strapi develop &
 
 strapiPID=$!

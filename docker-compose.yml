@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  api:
+  strapi-app:
     # Can comment out if use mongodb service below
     network_mode: host
     build: .
@@ -19,7 +19,7 @@ services:
       - DATABASE_AUTHENTICATION_DATABASE=strapi
       - HOST=localhost
     ports:
-      - 1337:1337
+      - 11337:1337
     volumes:
       - ./strapi-app:/usr/src/api/strapi-app
       #- /usr/src/api/strapi-app/node_modules
